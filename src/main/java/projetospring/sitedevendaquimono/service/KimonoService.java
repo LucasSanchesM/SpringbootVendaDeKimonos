@@ -53,8 +53,31 @@ public class KimonoService {
         return kimonoRepository.findAll();
     }
 
-    public void editKimonoById(String kimonoId ,UpdateKimonoDto updateKimonoDto){
-
+    public void editKimonoById(String kimonoId, UpdateKimonoDto updateKimonoDto){
+        var kimonoPresence = kimonoRepository.findById(UUID.fromString(kimonoId));
+        if(kimonoPresence.isPresent()){
+            if(updateKimonoDto.nome()!= null){
+                kimonoPresence.get().setNome(updateKimonoDto.nome());
+            }
+            if(updateKimonoDto.tamanho()!= null){
+                kimonoPresence.get().setTamanho(updateKimonoDto.tamanho());
+            }
+            if(updateKimonoDto.cor()!= null){
+                kimonoPresence.get().setCor(updateKimonoDto.cor());
+            }
+            if(updateKimonoDto.categoria()!= null){
+                kimonoPresence.get().setCategoria(updateKimonoDto.categoria());
+            }
+            if(updateKimonoDto.preco() != null){
+                kimonoPresence.get().setPreco(updateKimonoDto.preco());
+            }
+            if(updateKimonoDto.caminhoImagem() != null){
+                kimonoPresence.get().setCaminhoImagem(updateKimonoDto.caminhoImagem());
+            }
+        }else{
+            new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        kimonoRepository.save(kimonoPresence.get());
     }
 
 }

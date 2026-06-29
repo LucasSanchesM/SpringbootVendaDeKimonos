@@ -51,9 +51,9 @@ public class KimonoController {
     }
     @PutMapping("/{kimonoId}")
     public ResponseEntity<Void> editKimonoById(@PathVariable("kimonoId") String kimonoId, @RequestBody UpdateKimonoDto updateKimonoDto) {
-        //TODO: process PUT request
+        kimonoService.editKimonoById(kimonoId, updateKimonoDto);
         
-        return entity;
+        return ResponseEntity.ok().build();
     }
 
 }
