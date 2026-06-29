@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Uai Kimonos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --creme:#FBF4E4; --creme-2:#F3E8D2; --dourado:#C68A1F; --dourado-claro:#DFA93F;
+  --azul:#1B3A6B; --azul-escuro:#122847; --preto:#14171C; --preto-2:#1F242B;
+  --marrom:#7A6F5C; --branco:#FFFEFB;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--creme);color:var(--preto);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
+a{text-decoration:none;color:inherit;}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--dourado);outline-offset:3px;}
+
+/* Header Admin */
+header{position:sticky;top:0;z-index:100;background:rgba(251,244,228,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(20,23,28,0.08);}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1180px;margin:0 auto;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--preto);}
+.brand-name span{color:var(--dourado);}
+.admin-badge{background:var(--preto);color:var(--branco);padding:4px 10px;border-radius:6px;font-size:0.75rem;font-weight:700;font-family:'JetBrains Mono',monospace;text-transform:uppercase;}
+
+/* Form Container */
+.admin-wrap{max-width:760px;margin:48px auto;padding:0 24px;}
+.admin-header{margin-bottom:32px;text-align:center;}
+.admin-header h1{font-size:2.2rem;margin-bottom:8px;color:var(--azul);}
+.admin-header p{color:var(--marrom);font-size:1rem;}
+
+.admin-panel{background:var(--branco);padding:32px;border-radius:20px;box-shadow:0 8px 30px rgba(20,23,28,0.07);border:1px solid rgba(20,23,28,0.06);}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.form-group.full{grid-column:1 / -1;}
+
+.form-group label{display:block;font-size:0.9rem;font-weight:600;margin-bottom:8px;color:var(--preto-2);}
+.field-wrapper{display:flex;align-items:center;background:var(--creme);border:1px solid rgba(20,23,28,0.15);border-radius:12px;padding:0;transition:border-color 0.2s ease;}
+.field-wrapper:focus-within{border-color:var(--dourado);}
+
+.field-wrapper input, .field-wrapper select{width:100%;border:none;background:transparent;padding:12px 14px;font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--preto);outline:none;}
+.field-wrapper select{appearance:none;-webkit-appearance:none;cursor:pointer;}
+.select-wrapper{position:relative;}
+.select-wrapper::after{content:"▾";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--dourado);pointer-events:none;font-size:0.85rem;}
+
+.field-wrapper input[type="file"] {
+  cursor: pointer;
+  padding: 10px 14px;
+}
+
+.btn-submit{display:inline-flex;align-items:center;justify-content:center;width:100%;padding:14px 16px;margin-top:16px;border-radius:12px;font-weight:600;font-size:1rem;border:none;cursor:pointer;background:var(--azul);color:var(--branco);box-shadow:0 6px 18px rgba(27,58,107,0.22);transition:transform 0.2s ease,background 0.2s ease;}
+.btn-submit:hover{background:var(--dourado);transform:translateY(-2px);}
+
+/* Feedback Messages */
+.alert{display:none;padding:16px;border-radius:12px;margin-top:20px;font-weight:500;font-size:0.95rem;text-align:center;}
+.alert.success{display:block;background:#E4F4E8;color:#1A6B32;border:1px solid #BFE4C9;}
+.alert.error{display:block;background:#FDECEB;color:#9A3A2C;border:1px solid #F8C9C4;}
+
+@media (max-width:640px){
+  .form-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-name">Uai <span>Kimonos</span></div>
+      <span class="admin-badge">Admin</span>
+    </div>
+    <a href="products.html" style="font-size:0.9rem; font-weight:600; color:var(--marrom);">← Voltar ao site</a>
+  </div>
+</header>
+
+<main class="admin-wrap">
+  <div class="admin-header">
+    <h1>Cadastrar Kimono</h1>
+    <p>Preencha os dados abaixo para adicionar um novo produto ao catálogo.</p>
+  </div>
+
+  <div class="admin-panel">
+    <form id="formCadastrarKimono">
+      <div class="form-grid">
+        
+        <div class="form-group full">
+          <label for="nome">Nome do Produto</label>
+          <div class="field-wrapper">
+            <input type="text" id="nome" placeholder="Ex: Kimono Trançado Leve" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tamanho">Tamanho</label>
+          <div class="field-wrapper select-wrapper">
+            <select id="tamanho" required>
+              <option value="" disabled selected>Selecione...</option>
+              <option value="A0">A0</option>
+              <option value="A1">A1</option>
+              <option value="A2">A2</option>
+              <option value="A3">A3</option>
+              <option value="A4">A4</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cor">Cor</label>
+          <div class="field-wrapper select-wrapper">
+            <select id="cor" required>
+              <option value="" disabled selected>Selecione...</option>
+              <option value="Branco">Branco</option>
+              <option value="Azul">Azul</option>
+              <option value="Preto">Preto</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="categoria">Categoria</label>
+          <div class="field-wrapper select-wrapper">
+            <select id="categoria" required>
+              <option value="" disabled selected>Selecione...</option>
+              <option value="Treino">Treino</option>
+              <option value="Competição">Competição</option>
+              <option value="Premium">Premium</option>
+              <option value="Infantil">Infantil</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="quantidade">Quantidade em Estoque</label>
+          <div class="field-wrapper">
+            <input type="number" id="quantidade" min="0" placeholder="Ex: 3" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="preco">Preço (R$)</label>
+          <div class="field-wrapper">
+            <input type="number" id="preco" step="0.01" min="0" placeholder="Ex: 290.00" required>
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <label for="arquivoImagem">Imagem do Produto</label>
+          <div class="field-wrapper">
+            <input type="file" id="arquivoImagem" accept="image/*" required>
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <button type="submit" class="btn-submit" id="btnSalvar">Cadastrar Produto</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="mensagemFeedback" class="alert"></div>
+  </div>
+</main>
+<script>
+document.getElementById('formCadastrarKimono').addEventListener('submit', async function(e) {
+  e.preventDefault(); 
+
+  const btnSalvar = document.getElementById('btnSalvar');
+  const feedback = document.getElementById('mensagemFeedback');
+  
+  btnSalvar.textContent = "Salvando...";
+  btnSalvar.disabled = true;
+  feedback.className = "alert"; 
+  feedback.textContent = "";
+
+  const inputImagem = document.getElementById('arquivoImagem');
+  
+  if (inputImagem.files.length === 0) {
+    feedback.textContent = "Por favor, selecione uma imagem!";
+    feedback.classList.add('error');
+    btnSalvar.disabled = false;
+    return;
+  }
+
+  const arquivoReal = inputImagem.files[0];
+  const nomeDoArquivo = arquivoReal.name;
+  
+  // String exata que o seu Spring Boot espera receber dentro do JSON
+  const caminhoImagemFormatado = `/imagens/${nomeDoArquivo}`;
+
+  // 1. Prepara o arquivo binário para o Node (Porta 3000)
+  const dadosImagem = new FormData();
+  dadosImagem.append('foto', arquivoReal);
+
+  // 2. Prepara o JSON Puro para o Spring Boot (Porta 8080)
+  const payloadJson = {
+    nome: document.getElementById('nome').value,
+    tamanho: document.getElementById('tamanho').value,
+    cor: document.getElementById('cor').value,
+    categoria: document.getElementById('categoria').value,
+    preco: parseFloat(document.getElementById('preco').value),
+    quantidade: parseInt(document.getElementById('quantidade').value, 10),
+    caminhoImagem: caminhoImagemFormatado // Enviado estritamente como String
+  };
+
+  try {
+    // AÇÃO A: Faz o upload do arquivo para a pasta física do Front através do script local
+    const copiarMetodo = await fetch('http://localhost:3000/duplicar', {
+      method: 'POST',
+      body: dadosImagem 
+    });
+
+    if (!copiarMetodo.ok) {
+      throw new Error("Falha ao duplicar a imagem localmente.");
+    }
+
+    // AÇÃO B: Envia o JSON limpo para o seu back-end em Spring Boot
+    const salvarBackEnd = await fetch('http://localhost:8080/v1/kimonos', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(payloadJson)
+    });
+
+    if (salvarBackEnd.ok) {
+      feedback.textContent = "Sucesso! Imagem salva na pasta e dados enviados ao Spring Boot.";
+      feedback.classList.add('success');
+      this.reset(); 
+    } else {
+      feedback.textContent = "Erro ao salvar os dados no Spring Boot (Porta 8080).";
+      feedback.classList.add('error');
+    }
+
+  } catch (error) {
+    console.error(error);
+    feedback.textContent = "Erro: certifique-se de que o comando 'node server.js' está ativo no terminal.";
+    feedback.classList.add('error');
+  } finally {
+    btnSalvar.textContent = "Cadastrar Produto";
+    btnSalvar.disabled = false;
+  }
+});
+</script>
+
+</body>
+</html>

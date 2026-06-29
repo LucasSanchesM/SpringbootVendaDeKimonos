@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: sitedevendaquimono
+  datasource:
+    url: jdbc:mysql://localhost:3306/bancodedados
+    username: springuser
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

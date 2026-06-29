@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todos os Kimonos — Uai Kimonos</title>
+<meta name="description" content="Catálogo completo de kimonos de jiu-jítsu da Uai Kimonos: treino, competição e uso diário. Direto de Minas Gerais.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --creme:#FBF4E4;--creme-2:#F3E8D2;--dourado:#C68A1F;--dourado-claro:#DFA93F;
+  --azul:#1B3A6B;--azul-escuro:#122847;--preto:#14171C;--preto-2:#1F242B;
+  --marrom:#7A6F5C;--branco:#FFFEFB;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--creme);color:var(--preto);font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
+.mono{font-family:'JetBrains Mono',monospace;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--dourado);outline-offset:3px;}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}html{scroll-behavior:auto;}}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+.belt-divider{position:relative;height:64px;width:100%;overflow:hidden;}
+.belt-divider .stripe{position:absolute;inset:0;display:flex;align-items:center;}
+.belt-divider .stripe::before{content:"";display:block;width:100%;height:14px;}
+.belt-divider.azul .stripe::before{background:var(--azul);}
+.belt-divider.preto .stripe::before{background:var(--preto);}
+.belt-divider .bar-label{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--creme);padding:4px 18px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);white-space:nowrap;}
+
+header{position:sticky;top:0;z-index:100;background:rgba(251,244,228,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(20,23,28,0.08);}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1180px;margin:0 auto;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-mark{width:46px;height:46px;border-radius:50%;border:2px solid var(--dourado-claro);overflow:hidden;display:block;}
+.brand-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--preto);}
+.brand-name span{color:var(--dourado);}
+.nav-links{display:flex;gap:28px;font-size:0.92rem;font-weight:500;}
+.nav-links a{position:relative;padding:4px 0;}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--dourado);transition:width 0.25s ease;}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a.active{color:var(--azul);}
+.nav-cta{display:inline-flex;align-items:center;gap:6px;background:var(--azul);color:var(--branco);padding:9px 18px;border-radius:999px;font-size:0.85rem;font-weight:600;transition:transform 0.2s ease,background 0.2s ease;}
+.nav-cta:hover{background:var(--azul-escuro);transform:translateY(-1px);}
+@media (max-width:780px){.nav-links{display:none;}.brand-name{font-size:1.05rem;}}
+
+.hero{position:relative;padding:64px 24px 56px;text-align:center;overflow:hidden;}
+.hero::before{content:"";position:absolute;top:-200px;left:50%;width:900px;height:900px;transform:translateX(-50%);background:radial-gradient(circle,rgba(223,169,63,0.16) 0%,rgba(223,169,63,0) 65%);pointer-events:none;}
+.hero--compact{padding:48px 24px 36px;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dourado);margin-bottom:14px;}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3rem);line-height:1.06;max-width:850px;margin:0 auto 16px;}
+.hero h1 em{font-style:italic;color:var(--azul);}
+.hero p.lede{font-size:clamp(0.98rem,1.6vw,1.1rem);color:var(--marrom);max-width:520px;margin:0 auto;line-height:1.6;}
+
+.filters{padding:28px 24px 0;}
+.filters-bar{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(220px,1.6fr) repeat(4,minmax(140px,1fr));gap:12px;background:var(--branco);padding:14px;border-radius:18px;border:1px solid rgba(20,23,28,0.08);box-shadow:0 8px 24px rgba(20,23,28,0.06);}
+.field{display:flex;align-items:center;gap:8px;background:var(--creme);border:1px solid rgba(20,23,28,0.08);border-radius:12px;padding:10px 14px;transition:border-color 0.2s ease,background 0.2s ease;}
+.field:focus-within{border-color:var(--dourado);}
+.field--search{color:var(--marrom);}
+.field--search input{flex:1;border:none;background:transparent;font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--preto);outline:none;}
+.field--search input::placeholder{color:var(--marrom);}
+.field--select{position:relative;padding:0;}
+.field--select select{width:100%;appearance:none;-webkit-appearance:none;border:none;background:transparent;padding:10px 36px 10px 14px;font-family:'Inter',sans-serif;font-size:0.92rem;font-weight:500;color:var(--preto);cursor:pointer;outline:none;}
+.field--select::after{content:"▾";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--dourado);pointer-events:none;font-size:0.85rem;}
+@media (max-width:880px){.filters-bar{grid-template-columns:1fr 1fr;}.field--search{grid-column:1/-1;}}
+@media (max-width:520px){.filters-bar{grid-template-columns:1fr;}}
+
+.products{padding:48px 24px 100px;}
+.products--catalog{padding-top:36px;}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1080px;margin:0 auto;}
+@media (max-width:980px){.product-grid{grid-template-columns:repeat(2,1fr);gap:24px;}}
+@media (max-width:640px){.product-grid{grid-template-columns:1fr;}}
+
+.product-card{background:var(--branco);border-radius:20px;overflow:hidden;box-shadow:0 8px 30px rgba(20,23,28,0.07);border:1px solid rgba(20,23,28,0.06);display:flex;flex-direction:column;transition:transform 0.3s ease,box-shadow 0.3s ease;}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(20,23,28,0.14);}
+.product-photo{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--creme-2);}
+.product-photo img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
+.product-card:hover .product-photo img{transform:scale(1.06);}
+.product-photo .belt-tag{position:absolute;top:14px;left:14px;padding:6px 12px;border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;color:var(--branco);background:var(--azul);}
+.belt-tag.preto{background:var(--preto);}
+.belt-tag.dourado{background:var(--dourado);}
+.product-body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1;}
+.product-body h3{font-size:1.25rem;margin-bottom:6px;}
+.product-body .desc{color:var(--marrom);font-size:0.9rem;line-height:1.55;margin-bottom:16px;}
+.feature-list{list-style:none;margin-bottom:18px;}
+.feature-list li{display:flex;align-items:flex-start;gap:8px;font-size:0.84rem;color:var(--preto);margin-bottom:6px;}
+.feature-list li::before{content:"✓";color:var(--dourado);font-weight:700;flex-shrink:0;}
+.price-row{display:flex;align-items:baseline;justify-content:space-between;border-top:1px dashed rgba(20,23,28,0.15);padding-top:14px;margin-top:auto;}
+.price{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--preto);}
+.price-note{font-size:0.72rem;color:var(--marrom);}
+.product-actions{display:flex;gap:10px;margin-top:16px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:999px;font-weight:600;font-size:0.84rem;border:none;cursor:pointer;font-family:inherit;transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease,color 0.2s ease,border-color 0.2s ease;flex:1;}
+.btn-primary{background:var(--azul);color:var(--branco);box-shadow:0 6px 18px rgba(27,58,107,0.22);}
+.btn-primary:hover{background:var(--dourado);box-shadow:0 10px 24px rgba(198,138,31,0.28);transform:translateY(-2px);}
+.btn-secondary{background:transparent;color:var(--preto);border:1.5px solid rgba(20,23,28,0.22);}
+.btn-secondary:hover{border-color:var(--azul);color:var(--azul);transform:translateY(-2px);}
+
+.skeleton-card{background:var(--branco);border-radius:20px;overflow:hidden;border:1px solid rgba(20,23,28,0.06);box-shadow:0 8px 30px rgba(20,23,28,0.05);}
+.skeleton-photo{aspect-ratio:4/5;background:var(--creme-2);}
+.skeleton-body{padding:22px;}
+.skeleton-line{height:14px;border-radius:6px;background:var(--creme-2);margin-bottom:10px;}
+.skeleton-line.w-70{width:70%;}.skeleton-line.w-90{width:90%;}.skeleton-line.w-40{width:40%;}.skeleton-line.tall{height:22px;}
+.skeleton-photo,.skeleton-line{position:relative;overflow:hidden;}
+.skeleton-photo::after,.skeleton-line::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.55) 50%,transparent 100%);transform:translateX(-100%);animation:shimmer 1.4s infinite;}
+@keyframes shimmer{100%{transform:translateX(100%);}}
+
+.empty-state,.error-state{text-align:center;color:var(--marrom);padding:48px 16px;font-size:0.98rem;max-width:480px;margin:0 auto;}
+.error-state{color:#9A3A2C;}
+.hidden{display:none!important;}
+
+footer{padding:40px 24px 32px;text-align:center;background:var(--preto);color:#8C8374;}
+footer .brand-name{color:var(--creme);margin-bottom:6px;display:block;}
+footer .brand-name span{color:var(--dourado-claro);}
+footer p{font-size:0.82rem;line-height:1.6;}
+footer .made-in{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dourado-claro);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="/">
+      <span class="brand-mark"></span>
+      <span class="brand-name">Uai <span>Kimonos</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Nossa história</a>
+      <a href="/kimonos.html" class="active">Kimonos</a>
+      <a href="/#porque">Por que a gente</a>
+      <a onclick="document.getElementById('meuPopup').style.display='block'">Admin</a>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/" target="_blank" rel="noopener">Pedir no WhatsApp</a>
+  </div>
+</header>
+
+<div id="meuPopup" style="display:none; position:fixed; z-index:1; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.4);">
+  <div style="background-color:#fefefe; margin:15% auto; padding:20px; border:1px solid #888; width:30%; border-radius: 8px;">
+    <!-- Botão de fechar -->
+    <span onclick="document.getElementById('meuPopup').style.display='none'" style="float:right; font-size:28px; font-weight:bold; cursor:pointer;">&times;</span>
+    <h2>Olá!</h2>
+    <p>Informe a senha para entrar como admin.</p>
+    <div style="display: flex; margin: 2%;">
+      <input type="text" id="inputSenhaAdmin" placeholder="informe a senha aqui" style="outline: none; border-radius: 8%;">
+      <button onclick="verificartexto()" "margin-left: 2%; padding: 1%">Ok</button>
+    </div>
+  </div>
+
+</div>
+<section class="hero hero--compact">
+  <div class="hero-eyebrow">Catálogo · Uai Kimonos</div>
+  <h1>Todos os <em>Kimonos</em></h1>
+  <p class="lede">Encontre o kimono ideal para treino, competição ou uso diário.</p>
+</section>
+
+<div class="belt-divider azul"><div class="stripe"></div><span class="bar-label">Coleção completa</span></div>
+
+<section class="filters">
+  <div class="filters-bar">
+    <label class="field field--search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="f-search" type="search" placeholder="Buscar por nome..." />
+    </label>
+    <label class="field field--select">
+      <select id="f-categoria"><option value="">Categoria</option><option>Treino</option><option>Competição</option><option>Premium</option><option>Infantil</option></select>
+    </label>
+    <label class="field field--select">
+      <select id="f-cor"><option value="">Cor</option><option>Branco</option><option>Azul</option><option>Preto</option></select>
+    </label>
+    <label class="field field--select">
+      <select id="f-tamanho"><option value="">Tamanho</option><option>A0</option><option>A1</option><option>A2</option><option>A3</option><option>A4</option></select>
+    </label>
+    <label class="field field--select">
+      <select id="f-ordenar"><option value="">Ordenar</option><option value="preco-asc">Menor preço</option><option value="preco-desc">Maior preço</option><option value="nome-asc">Nome (A–Z)</option></select>
+    </label>
+  </div>
+</section>
+
+<section class="products products--catalog">
+  <div id="product-grid" class="product-grid"></div>
+  <div id="empty-state" class="empty-state hidden">Nenhum kimono encontrado com esses filtros.</div>
+  <div id="error-state" class="error-state hidden">Não foi possível carregar os produtos agora. Tente novamente em instantes.</div>
+</section>
+
+<footer>
+  <span class="brand-name">Uai <span>Kimonos</span></span>
+  <p>Kimonos de jiu-jítsu feitos em Minas Gerais, com preço justo e atendimento de perto.</p>
+  <div class="made-in">Respeito · Lealdade · Disciplina</div>
+</footer>
+
+<script>
+  // Em produção, a página é servida pelo próprio Spring Boot, então a API
+  // está sempre na MESMA origem de onde o HTML foi carregado.
+  // Só em desenvolvimento, quando o HTML é aberto via Live Server (porta 5500)
+  // em vez de pelo Spring, a origem é diferente — nesse caso apontamos
+  // explicitamente para o Spring em localhost:8080.
+  const SPRING_DEV_URL = 'http://localhost:8080';
+  const isLiveServer = window.location.port === '5500' || window.location.port === '5501';
+  const API_BASE = isLiveServer ? SPRING_DEV_URL : window.location.origin;
+
+  const API_URL = `${API_BASE}/v1/kimonos/list`;
+  const PLACEHOLDER_IMG = 'https://placehold.co/600x750/F3E8D2/7A6F5C?text=Uai+Kimonos';
+
+  // Resolve o caminho de imagem salvo no banco (ex: "imagens/kimonoazul.png")
+  // para uma URL completa e válida na origem correta da API.
+  // Se o backend já salvar a URL completa (http://... ou https://...),
+  // ela é usada como está.
+  function resolveImagePath(caminho) {
+    if (!caminho) return PLACEHOLDER_IMG;
+    if (/^https?:\/\//i.test(caminho)) return caminho;
+    const path = caminho.startsWith('/') ? caminho : '/' + caminho;
+    return API_BASE + path;
+  }
+
+  const grid = document.getElementById('product-grid');
+  const emptyEl = document.getElementById('empty-state');
+  const errorEl = document.getElementById('error-state');
+
+  const filters = {
+    search: document.getElementById('f-search'),
+    categoria: document.getElementById('f-categoria'),
+    cor: document.getElementById('f-cor'),
+    tamanho: document.getElementById('f-tamanho'),
+    ordenar: document.getElementById('f-ordenar'),
+  };
+
+  let kimonos = [];
+
+  function showSkeleton(n = 6) {
+    errorEl.classList.add('hidden');
+    emptyEl.classList.add('hidden');
+    grid.innerHTML = Array.from({length: n}).map(() => `
+      <div class="skeleton-card">
+        <div class="skeleton-photo"></div>
+        <div class="skeleton-body">
+          <div class="skeleton-line tall w-70"></div>
+          <div class="skeleton-line w-90"></div>
+          <div class="skeleton-line w-40"></div>
+        </div>
+      </div>`).join('');
+  }
+
+  function formatBRL(v) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v ?? 0);
+  }
+
+  function beltClass(cor) {
+    const c = (cor || '').toLowerCase();
+    if (c === 'preto') return 'preto';
+    if (c === 'branco') return 'dourado';
+    return '';
+  }
+
+  function renderCard(k) {
+    const img = resolveImagePath(k.caminhoImagem);
+    const tagClass = beltClass(k.cor);
+    const whatsappMsg = encodeURIComponent(`Olá! Tenho interesse no kimono ${k.nome} (${k.cor}, tam. ${k.tamanho}).`);
+    return `
+      <article class="product-card">
+        <div class="product-photo">
+          <img src="${img}" alt="${k.nome} ${k.cor}" onerror="this.src='${PLACEHOLDER_IMG}'"/>
+          <span class="belt-tag ${tagClass}">${k.categoria ?? ''}</span>
+        </div>
+        <div class="product-body">
+          <h3>${k.nome}</h3>
+          <p class="desc">Kimono ${(k.categoria||'').toLowerCase()} cor ${(k.cor||'').toLowerCase()}, tamanho ${k.tamanho}.</p>
+          <ul class="feature-list">
+            <li>Tamanho ${k.tamanho}</li>
+            <li>Cor ${k.cor}</li>
+            <li>${k.quantidade > 0 ? `${k.quantidade} em estoque` : 'Sob encomenda'}</li>
+          </ul>
+          <div class="price-row">
+            <span class="price">${formatBRL(k.preco)}</span>
+            <span class="price-note">à vista</span>
+          </div>
+          <div class="product-actions">
+            <a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/?text=${whatsappMsg}">Pedir</a>
+            <button class="btn btn-secondary" type="button">Detalhes</button>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function applyFilters() {
+    const search = filters.search.value.trim().toLowerCase();
+    const cat = filters.categoria.value;
+    const cor = filters.cor.value;
+    const tam = filters.tamanho.value;
+    const ord = filters.ordenar.value;
+
+    let list = kimonos.filter(k =>
+      (!search || (k.nome || '').toLowerCase().includes(search)) &&
+      (!cat || k.categoria === cat) &&
+      (!cor || k.cor === cor) &&
+      (!tam || k.tamanho === tam)
+    );
+
+    if (ord === 'preco-asc') list.sort((a,b) => (a.preco||0) - (b.preco||0));
+    else if (ord === 'preco-desc') list.sort((a,b) => (b.preco||0) - (a.preco||0));
+    else if (ord === 'nome-asc') list.sort((a,b) => (a.nome||'').localeCompare(b.nome||''));
+
+    if (list.length === 0) {
+      grid.innerHTML = '';
+      emptyEl.classList.remove('hidden');
+    } else {
+      emptyEl.classList.add('hidden');
+      grid.innerHTML = list.map(renderCard).join('');
+    }
+  }
+
+  async function loadKimonos() {
+    showSkeleton();
+    try {
+      const res = await fetch(API_URL, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      kimonos = await res.json();
+      applyFilters();
+    } catch (err) {
+      console.error('Erro ao carregar kimonos:', err);
+      grid.innerHTML = '';
+      emptyEl.classList.add('hidden');
+      errorEl.classList.remove('hidden');
+    }
+  }
+
+  Object.values(filters).forEach(el => el.addEventListener('input', applyFilters));
+  loadKimonos();
+
+  function verificartexto(){
+    var texto = document.getElementById("inputSenhaAdmin").value;
+    console.log(texto);
+    if(texto == "123"){
+      window.location.href = "admin.html"
+    }
+  }
+</script>
+
+</body>
+</html>
