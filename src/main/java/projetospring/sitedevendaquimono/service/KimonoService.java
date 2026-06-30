@@ -91,4 +91,14 @@ public class KimonoService {
             new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
+
+    public void atualizarImagem(String kimonoId, String caminhoImagem){
+    var kimonoPresence = kimonoRepository.findById(UUID.fromString(kimonoId));
+    if(kimonoPresence.isPresent()){
+        kimonoPresence.get().setCaminhoImagem(caminhoImagem);
+        kimonoRepository.save(kimonoPresence.get());
+    }else{
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+}
 }

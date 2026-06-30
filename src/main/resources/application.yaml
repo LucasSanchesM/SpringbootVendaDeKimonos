@@ -2,11 +2,20 @@ spring:
   application:
     name: sitedevendaquimono
   datasource:
-    url: jdbc:mysql://localhost:3306/bancodedados
-    username: springuser
-    password: 1234
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:postgresql://aws-0-us-east-1.pooler.supabase.com:5432/postgres}
+    username: ${DB_USER:postgres.wwksjgthcrmxejcrzdkw}
+    password: ${DB_PASSWORD:bancodedados1234}
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: ${DDL_AUTO:update}
+    show-sql: ${SHOW_SQL:true}
+storage:
+  endpoint: ${STORAGE_ENDPOINT:https://wwksjgthcrmxejcrzdkw.storage.supabase.co/storage/v1/s3}
+  bucket: ${STORAGE_BUCKET:kimonoImagens}
+  access-key: ${STORAGE_ACCESS_KEY:15ad94d9cb6101fe0fc54fbd8a529181}
+  secret-key: ${STORAGE_SECRET_KEY:03c1a208bea34d8bab865ce353d1d6cb26dd188c90a8fbea9f7796bcd152feed}
+  public-url: ${STORAGE_PUBLIC_URL:https://wwksjgthcrmxejcrzdkw.supabase.co/storage/v1/object/public/kimonoImagens}
+  region: ${STORAGE_REGION:us-east-1}
+server:
+  port: ${PORT:8080}

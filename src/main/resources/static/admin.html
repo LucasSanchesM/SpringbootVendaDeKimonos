@@ -15,44 +15,48 @@
   --marrom:#7A6F5C; --branco:#FFFEFB; --vermelho:#B3392B; --vermelho-claro:#FDECEB;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--creme);color:var(--preto);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+html{-webkit-text-size-adjust:100%;}
+body{background:var(--creme);color:var(--preto);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
 a{text-decoration:none;color:inherit;}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--dourado);outline-offset:3px;}
+img{max-width:100%;}
 
 /* Header Admin */
 header{position:sticky;top:0;z-index:100;background:rgba(251,244,228,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(20,23,28,0.08);}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1180px;margin:0 auto;}
-.brand{display:flex;align-items:center;gap:10px;}
-.brand-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--preto);}
+.nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 16px;padding:14px 20px;max-width:1180px;margin:0 auto;}
+.brand{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-width:0;}
+.brand-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--preto);white-space:nowrap;}
 .brand-name span{color:var(--dourado);}
-.admin-badge{background:var(--preto);color:var(--branco);padding:4px 10px;border-radius:6px;font-size:0.75rem;font-weight:700;font-family:'JetBrains Mono',monospace;text-transform:uppercase;}
+.admin-badge{background:var(--preto);color:var(--branco);padding:4px 10px;border-radius:6px;font-size:0.75rem;font-weight:700;font-family:'JetBrains Mono',monospace;text-transform:uppercase;white-space:nowrap;}
+.nav .voltar-link{font-size:0.9rem;font-weight:600;color:var(--marrom);white-space:nowrap;}
 
 /* Form Container */
-.admin-wrap{max-width:760px;margin:48px auto;padding:0 24px;}
+.admin-wrap{max-width:760px;margin:48px auto;padding:0 20px;}
 .admin-header{margin-bottom:32px;text-align:center;}
-.admin-header h1{font-size:2.2rem;margin-bottom:8px;color:var(--azul);}
+.admin-header h1{font-size:2.2rem;margin-bottom:8px;color:var(--azul);line-height:1.15;}
 .admin-header p{color:var(--marrom);font-size:1rem;}
 
 .admin-panel{background:var(--branco);padding:32px;border-radius:20px;box-shadow:0 8px 30px rgba(20,23,28,0.07);border:1px solid rgba(20,23,28,0.06);}
 
 /* Tabs (Cadastrar / Editar / Excluir) */
-.tabs{display:flex;gap:8px;margin-bottom:28px;background:var(--creme);padding:6px;border-radius:14px;border:1px solid rgba(20,23,28,0.06);}
-.tab-btn{flex:1;padding:12px 16px;border:none;background:transparent;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:0.95rem;color:var(--marrom);cursor:pointer;transition:background 0.2s ease,color 0.2s ease;}
+.tabs{display:flex;gap:8px;margin-bottom:28px;background:var(--creme);padding:6px;border-radius:14px;border:1px solid rgba(20,23,28,0.06);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.tab-btn{flex:1;min-width:max-content;padding:12px 16px;border:none;background:transparent;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:0.95rem;color:var(--marrom);cursor:pointer;transition:background 0.2s ease,color 0.2s ease;white-space:nowrap;}
 .tab-btn.active{background:var(--branco);color:var(--azul);box-shadow:0 3px 10px rgba(20,23,28,0.08);}
 .tab-panel{display:none;}
 .tab-panel.active{display:block;}
 
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .form-group.full{grid-column:1 / -1;}
+.form-group{min-width:0;}
 
 .form-group label{display:block;font-size:0.9rem;font-weight:600;margin-bottom:8px;color:var(--preto-2);}
 .form-group .hint{display:block;font-size:0.78rem;font-weight:400;color:var(--marrom);margin-top:6px;}
 
-.field-wrapper{display:flex;align-items:center;background:var(--creme);border:1px solid rgba(20,23,28,0.15);border-radius:12px;padding:0;transition:border-color 0.2s ease;}
+.field-wrapper{display:flex;align-items:center;background:var(--creme);border:1px solid rgba(20,23,28,0.15);border-radius:12px;padding:0;transition:border-color 0.2s ease;min-width:0;}
 .field-wrapper:focus-within{border-color:var(--dourado);}
 
-.field-wrapper input, .field-wrapper select{width:100%;border:none;background:transparent;padding:12px 14px;font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--preto);outline:none;}
+.field-wrapper input, .field-wrapper select{width:100%;min-width:0;border:none;background:transparent;padding:12px 14px;font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--preto);outline:none;}
 .field-wrapper select{appearance:none;-webkit-appearance:none;cursor:pointer;}
 .select-wrapper{position:relative;}
 .select-wrapper::after{content:"▾";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--dourado);pointer-events:none;font-size:0.85rem;}
@@ -60,6 +64,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(251,244,228,0.92);backd
 .field-wrapper input[type="file"] {
   cursor: pointer;
   padding: 10px 14px;
+  width:100%;
 }
 
 .btn-submit{display:inline-flex;align-items:center;justify-content:center;width:100%;padding:14px 16px;margin-top:16px;border-radius:12px;font-weight:600;font-size:1rem;border:none;cursor:pointer;background:var(--azul);color:var(--branco);box-shadow:0 6px 18px rgba(27,58,107,0.22);transition:transform 0.2s ease,background 0.2s ease;}
@@ -74,43 +79,70 @@ header{position:sticky;top:0;z-index:100;background:rgba(251,244,228,0.92);backd
 .btn-secondary:hover{border-color:var(--dourado);color:var(--azul);}
 
 /* Feedback Messages */
-.alert{display:none;padding:16px;border-radius:12px;margin-top:20px;font-weight:500;font-size:0.95rem;text-align:center;}
+.alert{display:none;padding:16px;border-radius:12px;margin-top:20px;font-weight:500;font-size:0.95rem;text-align:center;word-break:break-word;}
 .alert.success{display:block;background:#E4F4E8;color:#1A6B32;border:1px solid #BFE4C9;}
 .alert.error{display:block;background:#FDECEB;color:#9A3A2C;border:1px solid #F8C9C4;}
 .alert.info{display:block;background:#EAF1FB;color:var(--azul-escuro);border:1px solid #C9DCF8;}
 
 /* Seletor de kimono para edição/exclusão */
-.select-kimono-row{display:flex;gap:12px;align-items:flex-end;margin-bottom:24px;}
-.select-kimono-row .field-wrapper{flex:1;}
-.btn-refresh{flex-shrink:0;padding:12px 16px;border-radius:12px;border:1px solid rgba(20,23,28,0.15);background:var(--creme);color:var(--marrom);font-weight:600;font-size:0.85rem;cursor:pointer;transition:border-color 0.2s ease,color 0.2s ease;}
+.select-kimono-row{display:flex;gap:12px;align-items:stretch;margin-bottom:24px;}
+.select-kimono-row .field-wrapper{flex:1;min-width:0;}
+.btn-refresh{flex-shrink:0;padding:12px 16px;border-radius:12px;border:1px solid rgba(20,23,28,0.15);background:var(--creme);color:var(--marrom);font-weight:600;font-size:0.85rem;cursor:pointer;transition:border-color 0.2s ease,color 0.2s ease;white-space:nowrap;}
 .btn-refresh:hover{border-color:var(--dourado);color:var(--azul);}
 
-.edit-locked-banner{display:none;align-items:center;gap:10px;background:var(--creme-2);border:1px solid rgba(198,138,31,0.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:0.88rem;color:var(--preto-2);}
+.edit-locked-banner{display:none;align-items:flex-start;gap:10px;background:var(--creme-2);border:1px solid rgba(198,138,31,0.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:0.88rem;color:var(--preto-2);}
 .edit-locked-banner.active{display:flex;}
 .edit-locked-banner strong{color:var(--azul);}
 
-.delete-locked-banner{display:none;align-items:center;gap:10px;background:var(--vermelho-claro);border:1px solid rgba(179,57,43,0.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:0.88rem;color:var(--preto-2);}
+.delete-locked-banner{display:none;align-items:flex-start;gap:10px;background:var(--vermelho-claro);border:1px solid rgba(179,57,43,0.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:0.88rem;color:var(--preto-2);}
 .delete-locked-banner.active{display:flex;}
 .delete-locked-banner strong{color:var(--vermelho);}
 
 .edit-fields{display:none;}
 .edit-fields.active{display:block;}
 
-.current-image-preview{display:flex;align-items:center;gap:12px;margin-top:10px;}
-.current-image-preview img{width:56px;height:56px;border-radius:10px;object-fit:cover;border:1px solid rgba(20,23,28,0.1);background:var(--creme);}
-.current-image-preview span{font-size:0.82rem;color:var(--marrom);font-family:'JetBrains Mono',monospace;}
+.current-image-preview{display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap;}
+.current-image-preview img{width:56px;height:56px;border-radius:10px;object-fit:cover;border:1px solid rgba(20,23,28,0.1);background:var(--creme);flex-shrink:0;}
+.current-image-preview span{font-size:0.82rem;color:var(--marrom);font-family:'JetBrains Mono',monospace;word-break:break-all;}
 
 .delete-card{display:flex;align-items:center;gap:16px;background:var(--creme);border:1px solid rgba(20,23,28,0.1);border-radius:14px;padding:16px;margin-bottom:8px;}
 .delete-card img{width:64px;height:64px;border-radius:10px;object-fit:cover;border:1px solid rgba(20,23,28,0.1);background:var(--branco);flex-shrink:0;}
-.delete-card .delete-card-info{flex:1;}
-.delete-card .delete-card-info h3{font-size:1.05rem;color:var(--preto);margin-bottom:4px;}
-.delete-card .delete-card-info p{font-size:0.85rem;color:var(--marrom);}
+.delete-card .delete-card-info{flex:1;min-width:0;}
+.delete-card .delete-card-info h3{font-size:1.05rem;color:var(--preto);margin-bottom:4px;word-break:break-word;}
+.delete-card .delete-card-info p{font-size:0.85rem;color:var(--marrom);word-break:break-word;}
 .delete-card .delete-card-info p span{font-family:'JetBrains Mono',monospace;}
 
+/* ===== Tablet ===== */
+@media (max-width:768px){
+  .admin-wrap{margin:32px auto;}
+  .admin-panel{padding:24px;}
+}
+
+/* ===== Mobile ===== */
 @media (max-width:640px){
-  .form-grid{grid-template-columns:1fr;}
+  .nav{padding:12px 16px;}
+  .admin-header h1{font-size:1.7rem;}
+  .admin-header p{font-size:0.9rem;}
+  .admin-panel{padding:20px 16px;border-radius:16px;}
+  .form-grid{grid-template-columns:1fr;gap:16px;}
   .select-kimono-row{flex-direction:column;align-items:stretch;}
+  .btn-refresh{width:100%;}
   .delete-card{flex-direction:column;text-align:center;}
+  .delete-card .delete-card-info{width:100%;}
+  .current-image-preview{justify-content:center;text-align:left;}
+  .tab-btn{font-size:0.88rem;padding:11px 14px;}
+}
+
+/* ===== Telas bem pequenas ===== */
+@media (max-width:380px){
+  .admin-wrap{padding:0 14px;margin:24px auto;}
+  .admin-panel{padding:16px 12px;}
+  .admin-header h1{font-size:1.45rem;}
+  .brand-name{font-size:1.05rem;}
+  .tabs{padding:4px;gap:4px;}
+  .tab-btn{padding:10px 10px;font-size:0.82rem;}
+  .field-wrapper input, .field-wrapper select{padding:11px 12px;font-size:0.9rem;}
+  .btn-submit, .btn-danger, .btn-secondary{font-size:0.92rem;padding:13px 14px;}
 }
 </style>
 </head>
@@ -122,7 +154,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(251,244,228,0.92);backd
       <div class="brand-name">Uai <span>Kimonos</span></div>
       <span class="admin-badge">Admin</span>
     </div>
-    <a href="products.html" style="font-size:0.9rem; font-weight:600; color:var(--marrom);">← Voltar ao site</a>
+    <a href="products.html" class="voltar-link">← Voltar ao site</a>
   </div>
 </header>
 
@@ -370,8 +402,11 @@ header{position:sticky;top:0;z-index:100;background:rgba(251,244,228,0.92);backd
 
 <script>
 /* ======================= CONFIG / ESTADO ======================= */
-const API_BASE = 'http://localhost:8080/v1/kimonos';
-const NODE_BASE = 'http://localhost:3000';
+const SPRING_DEV_URL = 'http://localhost:8080';
+const isLiveServer = window.location.port === '5500' || window.location.port === '5501';
+const API_BASE_ORIGIN = isLiveServer ? SPRING_DEV_URL : window.location.origin;
+const API_BASE = `${API_BASE_ORIGIN}/v1/kimonos`;
+
 let kimonoAtual = null; // dados completos do kimono em edição (vindo do GET /v1/kimonos/{id})
 let kimonoParaExcluir = null; // dados completos do kimono selecionado para exclusão
 
@@ -405,7 +440,14 @@ tabButtons.forEach(btn => {
   });
 });
 
-/* ======================= CADASTRAR (sem alterações de lógica) ======================= */
+/* ======================= Helper: extrai o ID do header Location ======================= */
+function extrairIdDoLocation(location) {
+  if (!location) return null;
+  const partes = location.split('/').filter(Boolean);
+  return partes[partes.length - 1];
+}
+
+/* ======================= CADASTRAR ======================= */
 document.getElementById('formCadastrarKimono').addEventListener('submit', async function(e) {
   e.preventDefault();
 
@@ -427,11 +469,6 @@ document.getElementById('formCadastrarKimono').addEventListener('submit', async 
   }
 
   const arquivoReal = inputImagem.files[0];
-  const nomeDoArquivo = arquivoReal.name;
-  const caminhoImagemFormatado = `/imagens/${nomeDoArquivo}`;
-
-  const dadosImagem = new FormData();
-  dadosImagem.append('foto', arquivoReal);
 
   const payloadJson = {
     nome: document.getElementById('nome').value,
@@ -440,37 +477,48 @@ document.getElementById('formCadastrarKimono').addEventListener('submit', async 
     categoria: document.getElementById('categoria').value,
     preco: parseFloat(document.getElementById('preco').value),
     quantidade: parseInt(document.getElementById('quantidade').value, 10),
-    caminhoImagem: caminhoImagemFormatado
+    caminhoImagem: null
   };
 
   try {
-    const copiarMetodo = await fetch(`${NODE_BASE}/duplicar`, {
-      method: 'POST',
-      body: dadosImagem
-    });
-
-    if (!copiarMetodo.ok) {
-      throw new Error("Falha ao duplicar a imagem localmente.");
-    }
-
-    const salvarBackEnd = await fetch(`${API_BASE}`, {
+    // 1. Cria o kimono (ainda sem imagem)
+    const respostaCriar = await fetch(API_BASE, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payloadJson)
     });
 
-    if (salvarBackEnd.ok) {
-      feedback.textContent = "Sucesso! Imagem salva na pasta e dados enviados ao Spring Boot.";
-      feedback.classList.add('success');
-      this.reset();
-    } else {
-      feedback.textContent = "Erro ao salvar os dados no Spring Boot (Porta 8080).";
-      feedback.classList.add('error');
+    if (!respostaCriar.ok) {
+      throw new Error("Falha ao criar o kimono no Spring Boot.");
     }
+
+    const location = respostaCriar.headers.get('Location');
+    const novoId = extrairIdDoLocation(location);
+
+    if (!novoId) {
+      throw new Error("Não foi possível identificar o ID do kimono criado.");
+    }
+
+    // 2. Sobe a imagem para o Supabase Storage via Spring
+    const dadosImagem = new FormData();
+    dadosImagem.append('foto', arquivoReal);
+
+    const respostaImagem = await fetch(`${API_BASE}/${novoId}/imagem`, {
+      method: 'POST',
+      body: dadosImagem
+    });
+
+    if (!respostaImagem.ok) {
+      throw new Error("Kimono criado, mas falhou o upload da imagem.");
+    }
+
+    feedback.textContent = "Sucesso! Kimono cadastrado e imagem enviada.";
+    feedback.classList.add('success');
+    this.reset();
 
   } catch (error) {
     console.error(error);
-    feedback.textContent = "Erro: certifique-se de que o comando 'node server.js' está ativo no terminal.";
+    feedback.textContent = error.message || "Erro ao cadastrar o kimono. Verifique se o backend está ativo.";
     feedback.classList.add('error');
   } finally {
     btnSalvar.textContent = "Cadastrar Produto";
@@ -514,7 +562,7 @@ async function carregarListaKimonos() {
   } catch (error) {
     console.error(error);
     seletorKimono.innerHTML = `<option value="" disabled selected>Erro ao carregar</option>`;
-    mensagemSeletor.textContent = "Erro ao buscar a lista. Verifique se o Spring Boot (porta 8080) está rodando.";
+    mensagemSeletor.textContent = "Erro ao buscar a lista. Verifique se o backend está rodando.";
     mensagemSeletor.classList.add('error');
   }
 }
@@ -594,7 +642,6 @@ document.getElementById('formEditarKimono').addEventListener('submit', async fun
   feedbackEdicao.className = "alert";
   feedbackEdicao.textContent = "";
 
-  // Pega valores dos campos; vazio = mantém o valor original do kimonoAtual
   const novoNome = document.getElementById('editNome').value.trim();
   const novoTamanho = document.getElementById('editTamanho').value;
   const novaCor = document.getElementById('editCor').value;
@@ -603,29 +650,8 @@ document.getElementById('formEditarKimono').addEventListener('submit', async fun
   const novoPreco = document.getElementById('editPreco').value;
   const inputImagem = document.getElementById('editArquivoImagem');
 
-  let caminhoImagemFinal = kimonoAtual.caminhoImagem;
-
   try {
-    // Se uma nova imagem foi escolhida, duplica no Node e atualiza o caminho
-    if (inputImagem.files.length > 0) {
-      const arquivoReal = inputImagem.files[0];
-      const nomeDoArquivo = arquivoReal.name;
-      caminhoImagemFinal = `/imagens/${nomeDoArquivo}`;
-
-      const dadosImagem = new FormData();
-      dadosImagem.append('foto', arquivoReal);
-
-      const copiarMetodo = await fetch(`${NODE_BASE}/duplicar`, {
-        method: 'POST',
-        body: dadosImagem
-      });
-
-      if (!copiarMetodo.ok) {
-        throw new Error("Falha ao duplicar a nova imagem localmente.");
-      }
-    }
-
-    // Monta o objeto completo exigido pelo PUT, mesclando alterações com os dados originais
+    // 1. Atualiza os dados textuais do kimono (mantém o caminhoImagem atual por enquanto)
     const payloadJson = {
       ...kimonoAtual,
       nome: novoNome !== "" ? novoNome : kimonoAtual.nome,
@@ -633,8 +659,7 @@ document.getElementById('formEditarKimono').addEventListener('submit', async fun
       cor: novaCor !== "" ? novaCor : kimonoAtual.cor,
       categoria: novaCategoria !== "" ? novaCategoria : kimonoAtual.categoria,
       quantidade: novaQuantidade !== "" ? parseInt(novaQuantidade, 10) : kimonoAtual.quantidade,
-      preco: novoPreco !== "" ? parseFloat(novoPreco) : kimonoAtual.preco,
-      caminhoImagem: caminhoImagemFinal
+      preco: novoPreco !== "" ? parseFloat(novoPreco) : kimonoAtual.preco
     };
 
     const atualizarBackEnd = await fetch(`${API_BASE}/${kimonoAtual.kimonoId}`, {
@@ -643,20 +668,38 @@ document.getElementById('formEditarKimono').addEventListener('submit', async fun
       body: JSON.stringify(payloadJson)
     });
 
-    if (atualizarBackEnd.ok) {
-      feedbackEdicao.textContent = "Sucesso! Kimono atualizado.";
-      feedbackEdicao.classList.add('success');
-      kimonoAtual = payloadJson;
-      preencherFormularioEdicao(kimonoAtual);
-      carregarListaKimonos(); // atualiza nomes/labels na lista, caso o nome tenha mudado
-    } else {
-      feedbackEdicao.textContent = "Erro ao atualizar os dados no Spring Boot (Porta 8080).";
-      feedbackEdicao.classList.add('error');
+    if (!atualizarBackEnd.ok) {
+      throw new Error("Erro ao atualizar os dados do kimono.");
     }
+
+    // 2. Se uma nova imagem foi escolhida, sobe ela e o backend já atualiza o caminhoImagem sozinho
+    if (inputImagem.files.length > 0) {
+      const arquivoReal = inputImagem.files[0];
+      const dadosImagem = new FormData();
+      dadosImagem.append('foto', arquivoReal);
+
+      const respostaImagem = await fetch(`${API_BASE}/${kimonoAtual.kimonoId}/imagem`, {
+        method: 'POST',
+        body: dadosImagem
+      });
+
+      if (!respostaImagem.ok) {
+        throw new Error("Dados atualizados, mas falhou o upload da nova imagem.");
+      }
+    }
+
+    feedbackEdicao.textContent = "Sucesso! Kimono atualizado.";
+    feedbackEdicao.classList.add('success');
+
+    // Recarrega os dados atualizados do backend (já com a imagem nova, se houver)
+    const respostaAtualizada = await fetch(`${API_BASE}/${kimonoAtual.kimonoId}`);
+    kimonoAtual = await respostaAtualizada.json();
+    preencherFormularioEdicao(kimonoAtual);
+    carregarListaKimonos();
 
   } catch (error) {
     console.error(error);
-    feedbackEdicao.textContent = "Erro: certifique-se de que o comando 'node server.js' está ativo no terminal.";
+    feedbackEdicao.textContent = error.message || "Erro ao atualizar o kimono. Verifique se o backend está ativo.";
     feedbackEdicao.classList.add('error');
   } finally {
     btnAtualizar.textContent = "Salvar Alterações";
@@ -664,7 +707,7 @@ document.getElementById('formEditarKimono').addEventListener('submit', async fun
   }
 });
 
-/* ======================= EXCLUIR ======================= */
+/* ======================= EXCLUIR (sem alterações de lógica) ======================= */
 const seletorKimonoExcluir = document.getElementById('seletorKimonoExcluir');
 const mensagemSeletorExcluir = document.getElementById('mensagemSeletorExcluir');
 const bannerExclusao = document.getElementById('bannerExclusao');
@@ -702,7 +745,7 @@ async function carregarListaKimonosExcluir() {
   } catch (error) {
     console.error(error);
     seletorKimonoExcluir.innerHTML = `<option value="" disabled selected>Erro ao carregar</option>`;
-    mensagemSeletorExcluir.textContent = "Erro ao buscar a lista. Verifique se o Spring Boot (porta 8080) está rodando.";
+    mensagemSeletorExcluir.textContent = "Erro ao buscar a lista. Verifique se o backend está rodando.";
     mensagemSeletorExcluir.classList.add('error');
   }
 }
@@ -717,7 +760,6 @@ seletorKimonoExcluir.addEventListener('change', async function() {
   fecharExclusao(false);
 
   try {
-    // Rota usada: GET http://localhost:8080/v1/kimonos/{id}
     const resposta = await fetch(`${API_BASE}/${id}`);
     if (!resposta.ok) throw new Error("Kimono não encontrado.");
 
@@ -767,7 +809,6 @@ btnExcluir.addEventListener('click', async function() {
   mensagemFeedbackExclusao.textContent = "";
 
   try {
-    // Rota usada: DELETE http://localhost:8080/v1/kimonos/{id}
     const excluirBackEnd = await fetch(`${API_BASE}/${kimonoParaExcluir.kimonoId}`, {
       method: 'DELETE'
     });
@@ -777,13 +818,13 @@ btnExcluir.addEventListener('click', async function() {
       mensagemFeedbackExclusao.classList.add('success');
       await carregarListaKimonosExcluir();
     } else {
-      mensagemFeedbackExclusao.textContent = "Erro ao excluir o kimono no Spring Boot (Porta 8080).";
+      mensagemFeedbackExclusao.textContent = "Erro ao excluir o kimono no backend.";
       mensagemFeedbackExclusao.classList.add('error');
     }
 
   } catch (error) {
     console.error(error);
-    mensagemFeedbackExclusao.textContent = "Erro: certifique-se de que o Spring Boot (porta 8080) está ativo.";
+    mensagemFeedbackExclusao.textContent = "Erro: certifique-se de que o backend está ativo.";
     mensagemFeedbackExclusao.classList.add('error');
   } finally {
     btnExcluir.textContent = "Excluir Produto";

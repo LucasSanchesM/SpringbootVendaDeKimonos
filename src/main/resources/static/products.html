@@ -34,20 +34,66 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 .belt-divider.preto .stripe::before{background:var(--preto);}
 .belt-divider .bar-label{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--creme);padding:4px 18px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);white-space:nowrap;}
 
+/* ===== Header / Nav responsivo ===== */
 header{position:sticky;top:0;z-index:100;background:rgba(251,244,228,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(20,23,28,0.08);}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1180px;margin:0 auto;}
-.brand{display:flex;align-items:center;gap:10px;}
-.brand-mark{width:46px;height:46px;border-radius:50%;border:2px solid var(--dourado-claro);overflow:hidden;display:block;}
-.brand-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--preto);}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 24px;max-width:1180px;margin:0 auto;flex-wrap:nowrap;}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;flex-shrink:1;}
+.brand-mark{width:46px;height:46px;border-radius:50%;border:2px solid var(--dourado-claro);overflow:hidden;display:block;flex-shrink:0;object-fit:cover;}
+.brand-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--preto);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .brand-name span{color:var(--dourado);}
-.nav-links{display:flex;gap:28px;font-size:0.92rem;font-weight:500;}
+
+.nav-links{display:flex;align-items:center;gap:28px;font-size:0.92rem;font-weight:500;flex-shrink:0;}
 .nav-links a{position:relative;padding:4px 0;}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--dourado);transition:width 0.25s ease;}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
 .nav-links a.active{color:var(--azul);}
-.nav-cta{display:inline-flex;align-items:center;gap:6px;background:var(--azul);color:var(--branco);padding:9px 18px;border-radius:999px;font-size:0.85rem;font-weight:600;transition:transform 0.2s ease,background 0.2s ease;}
+
+.nav-cta{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--azul);color:var(--branco);padding:9px 18px;border-radius:999px;font-size:0.85rem;font-weight:600;white-space:nowrap;flex-shrink:0;transition:transform 0.2s ease,background 0.2s ease;}
 .nav-cta:hover{background:var(--azul-escuro);transform:translateY(-1px);}
-@media (max-width:780px){.nav-links{display:none;}.brand-name{font-size:1.05rem;}}
+.nav-cta .cta-short{display:none;}
+
+.nav-toggle{display:none;flex-shrink:0;width:42px;height:42px;border-radius:12px;border:1px solid rgba(20,23,28,0.12);background:var(--branco);align-items:center;justify-content:center;cursor:pointer;}
+.nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{content:"";display:block;width:20px;height:2px;background:var(--preto);border-radius:2px;position:relative;transition:transform 0.25s ease,opacity 0.25s ease;}
+.nav-toggle span::before{position:absolute;top:-6px;left:0;}
+.nav-toggle span::after{position:absolute;top:6px;left:0;}
+.nav-toggle[aria-expanded="true"] span{background:transparent;}
+.nav-toggle[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg);}
+.nav-toggle[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg);}
+
+@media (max-width:780px){
+  .nav-links{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:var(--branco);
+    border-bottom:1px solid rgba(20,23,28,0.08);
+    box-shadow:0 16px 28px rgba(20,23,28,0.1);
+    padding:10px 24px 18px;
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    pointer-events:none;
+    transition:max-height 0.3s ease,opacity 0.2s ease;
+  }
+  .nav-links a{padding:10px 0;width:100%;}
+  .nav-links.is-open{max-height:320px;opacity:1;pointer-events:auto;}
+  .nav-toggle{display:flex;}
+  .brand-name{font-size:1.1rem;}
+  .nav-cta{padding:9px 14px;}
+}
+@media (max-width:460px){
+  .nav{padding:12px 16px;}
+  .brand-mark{width:38px;height:38px;}
+  .brand-name{font-size:1rem;}
+  .nav-cta .cta-full{display:none;}
+  .nav-cta .cta-short{display:inline;}
+  .nav-cta{padding:9px 12px;font-size:0.8rem;}
+}
 
 .hero{position:relative;padding:64px 24px 56px;text-align:center;overflow:hidden;}
 .hero::before{content:"";position:absolute;top:-200px;left:50%;width:900px;height:900px;transform:translateX(-50%);background:radial-gradient(circle,rgba(223,169,63,0.16) 0%,rgba(223,169,63,0) 65%);pointer-events:none;}
@@ -62,7 +108,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(251,244,228,0.92);backd
 .field{display:flex;align-items:center;gap:8px;background:var(--creme);border:1px solid rgba(20,23,28,0.08);border-radius:12px;padding:10px 14px;transition:border-color 0.2s ease,background 0.2s ease;}
 .field:focus-within{border-color:var(--dourado);}
 .field--search{color:var(--marrom);}
-.field--search input{flex:1;border:none;background:transparent;font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--preto);outline:none;}
+.field--search input{flex:1;border:none;background:transparent;font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--preto);outline:none;min-width:0;}
 .field--search input::placeholder{color:var(--marrom);}
 .field--select{position:relative;padding:0;}
 .field--select select{width:100%;appearance:none;-webkit-appearance:none;border:none;background:transparent;padding:10px 36px 10px 14px;font-family:'Inter',sans-serif;font-size:0.92rem;font-weight:500;color:var(--preto);cursor:pointer;outline:none;}
@@ -93,8 +139,8 @@ header{position:sticky;top:0;z-index:100;background:rgba(251,244,228,0.92);backd
 .price-row{display:flex;align-items:baseline;justify-content:space-between;border-top:1px dashed rgba(20,23,28,0.15);padding-top:14px;margin-top:auto;}
 .price{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--preto);}
 .price-note{font-size:0.72rem;color:var(--marrom);}
-.product-actions{display:flex;gap:10px;margin-top:16px;}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:999px;font-weight:600;font-size:0.84rem;border:none;cursor:pointer;font-family:inherit;transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease,color 0.2s ease,border-color 0.2s ease;flex:1;}
+.product-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:999px;font-weight:600;font-size:0.84rem;border:none;cursor:pointer;font-family:inherit;transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease,color 0.2s ease,border-color 0.2s ease;flex:1;min-width:120px;}
 .btn-primary{background:var(--azul);color:var(--branco);box-shadow:0 6px 18px rgba(27,58,107,0.22);}
 .btn-primary:hover{background:var(--dourado);box-shadow:0 10px 24px rgba(198,138,31,0.28);transform:translateY(-2px);}
 .btn-secondary{background:transparent;color:var(--preto);border:1.5px solid rgba(20,23,28,0.22);}
@@ -139,7 +185,7 @@ footer .made-in{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size
 .details-stat .value{font-weight:600;font-size:1rem;color:var(--preto);}
 .details-price-row{display:flex;align-items:baseline;justify-content:space-between;border-top:1px dashed rgba(20,23,28,0.18);padding-top:18px;margin-bottom:22px;}
 .details-price{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;color:var(--preto);}
-.details-actions{display:flex;gap:12px;}
+.details-actions{display:flex;gap:12px;flex-wrap:wrap;}
 .details-actions .btn{flex:none;padding:14px 26px;}
 @media (max-width:860px){
   .details-modal{flex-direction:column;height:94vh;}
@@ -147,39 +193,97 @@ footer .made-in{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size
   .details-content{padding:28px 24px 32px;}
   .details-grid{grid-template-columns:1fr 1fr;}
 }
+
+/* ===== Modal de acesso admin ===== */
+.admin-overlay{position:fixed;inset:0;z-index:300;background:rgba(20,23,28,0.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+.admin-overlay.is-open{opacity:1;pointer-events:auto;}
+.admin-modal{position:relative;width:100%;max-width:380px;background:var(--creme);border-radius:22px;padding:36px 28px 28px;box-shadow:0 30px 80px rgba(0,0,0,0.35);transform:translateY(18px) scale(0.97);opacity:0;transition:transform 0.3s ease,opacity 0.3s ease;}
+.admin-overlay.is-open .admin-modal{transform:translateY(0) scale(1);opacity:1;}
+.admin-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;background:var(--branco);border:1px solid rgba(20,23,28,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;line-height:1;color:var(--preto);transition:background 0.2s ease,color 0.2s ease,transform 0.2s ease;}
+.admin-close:hover{background:var(--azul);color:var(--branco);transform:rotate(90deg);}
+.admin-icon{width:52px;height:52px;border-radius:50%;background:var(--azul);color:var(--branco);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.admin-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--dourado);margin-bottom:8px;}
+.admin-modal h2{font-size:1.4rem;margin-bottom:8px;}
+.admin-modal p.admin-desc{color:var(--marrom);font-size:0.9rem;line-height:1.55;margin-bottom:22px;}
+.admin-field{margin-bottom:8px;}
+.admin-field label{display:block;font-size:0.78rem;font-weight:600;color:var(--preto);margin-bottom:6px;}
+.admin-input-row{display:flex;align-items:center;gap:6px;background:var(--branco);border:1.5px solid rgba(20,23,28,0.12);border-radius:12px;padding:4px 6px 4px 14px;transition:border-color 0.2s ease;}
+.admin-input-row:focus-within{border-color:var(--dourado);}
+.admin-input-row input{flex:1;min-width:0;border:none;background:transparent;outline:none;font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--preto);padding:10px 0;}
+.admin-toggle-visibility{flex-shrink:0;width:36px;height:36px;border-radius:9px;border:none;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--marrom);transition:background 0.2s ease,color 0.2s ease;}
+.admin-toggle-visibility:hover{background:var(--creme-2);color:var(--azul);}
+.admin-error{display:none;align-items:center;gap:6px;color:#9A3A2C;font-size:0.8rem;margin-top:10px;}
+.admin-error.is-visible{display:flex;}
+.admin-actions{display:flex;gap:10px;margin-top:24px;}
+.admin-actions .btn{padding:13px 16px;}
+@media (max-width:420px){
+  .admin-modal{padding:30px 20px 22px;border-radius:18px;}
+  .admin-actions{flex-direction:column;}
+  .admin-actions .btn{width:100%;}
+}
 </style>
 </head>
 <body>
 
 <header>
   <div class="nav">
-    <a class="brand">
-      <img src="imagens/logo/image.png"
-      <span class="brand-mark"></span>
+    <a class="brand" href="index.html">
+      <img class="brand-mark" src="imagens/logo/image.png" alt="Logo Uai Kimonos">
       <span class="brand-name">Uai <span>Kimonos</span></span>
     </a>
-    <nav class="nav-links">
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menu">
+      <span></span>
+    </button>
+
+    <nav id="nav-links" class="nav-links">
       <a href="index.html">Nossa história</a>
       <a href="kimonos.html" class="active">Kimonos</a>
       <a href="index.html">Por que a gente</a>
       <a href="index.html">Contato</a>
     </nav>
-    <a class="nav-cta" href="https://wa.me/" target="_blank" rel="noopener">Pedir no WhatsApp</a>
+
+    <a class="nav-cta" href="https://wa.me/" target="_blank" rel="noopener">
+      <span class="cta-full">Pedir no WhatsApp</span>
+      <span class="cta-short">Pedir</span>
+    </a>
   </div>
 </header>
 
-<div id="meuPopup" style="display:none; position:fixed; z-index:1; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.4);">
-  <div style="background-color:#fefefe; margin:15% auto; padding:20px; border:1px solid #888; width:30%; border-radius: 8px;">
-    <!-- Botão de fechar -->
-    <span onclick="document.getElementById('meuPopup').style.display='none'" style="float:right; font-size:28px; font-weight:bold; cursor:pointer;">&times;</span>
-    <h2>Olá!</h2>
-    <p>Informe a senha para entrar como admin.</p>
-    <div style="display: flex; margin: 2%;">
-      <input type="password" id="inputSenhaAdmin" placeholder="informe a senha aqui" style="outline: none; border-radius: 8%;">
-      <button onclick="verificartexto()" "margin-left: 2%; padding: 1%">Ok</button>
-    </div>
-  </div>
+<div id="meuPopup" class="admin-overlay" aria-hidden="true">
+  <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+    <button class="admin-close" type="button" aria-label="Fechar" onclick="closeAdminPopup()">&times;</button>
 
+    <div class="admin-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+
+    <div class="admin-eyebrow">Área restrita</div>
+    <h2 id="admin-title">Acesso admin</h2>
+    <p class="admin-desc">Informe a senha de administrador para continuar.</p>
+
+    <form id="admin-form" onsubmit="return false;">
+      <div class="admin-field">
+        <label for="inputSenhaAdmin">Senha</label>
+        <div class="admin-input-row">
+          <input type="password" id="inputSenhaAdmin" placeholder="Digite sua senha" autocomplete="current-password" />
+          <button type="button" class="admin-toggle-visibility" id="admin-toggle-eye" aria-label="Mostrar senha" aria-pressed="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-error" id="admin-error">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Senha incorreta. Tente novamente.</span>
+      </div>
+
+      <div class="admin-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeAdminPopup()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" onclick="verificartexto()">Entrar</button>
+      </div>
+    </form>
+  </div>
 </div>
 <section class="hero hero--compact">
   <div class="hero-eyebrow">Catálogo · Uai Kimonos</div>
@@ -250,7 +354,7 @@ footer .made-in{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size
   <span class="brand-name">Uai <span>Kimonos</span></span>
   <p>Kimonos de jiu-jítsu feitos em Minas Gerais, com preço justo e atendimento de perto.</p>
   <div class="made-in">Respeito · Lealdade · Disciplina</div>
-  <div onclick="document.getElementById('meuPopup').style.display='block'" class="made-in" style="color: white;">Sou Admin</div>
+  <button type="button" onclick="openAdminPopup()" class="made-in" style="color: white;background:none;border:none;cursor:pointer;font-family:inherit;">Sou Admin</button>
 
 </footer>
 
@@ -442,15 +546,82 @@ footer .made-in{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && detailsOverlay.classList.contains('is-open')) closeDetails();
+    if (e.key === 'Escape' && navLinks.classList.contains('is-open')) closeMobileNav();
+    if (e.key === 'Escape' && adminOverlay.classList.contains('is-open')) closeAdminPopup();
   });
 
   function verificartexto(){
     var texto = document.getElementById("inputSenhaAdmin").value;
-    console.log(texto);
-    if(texto == "senha4321@"){
-      window.location.href = "admin.html"
+    if(texto === "senha4321@"){
+      window.location.href = "admin.html";
+    } else {
+      document.getElementById('admin-error').classList.add('is-visible');
+      document.getElementById('inputSenhaAdmin').focus();
     }
   }
+
+  // ===== Menu mobile (hambúrguer) =====
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  function closeMobileNav() {
+    navLinks.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Fecha o menu mobile ao clicar em um link ou fora dele
+  navLinks.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') closeMobileNav();
+  });
+  document.addEventListener('click', (e) => {
+    if (!navLinks.classList.contains('is-open')) return;
+    if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) closeMobileNav();
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 780) closeMobileNav();
+  });
+
+  // ===== Modal de acesso admin =====
+  const adminOverlay = document.getElementById('meuPopup');
+  const adminInput = document.getElementById('inputSenhaAdmin');
+  const adminError = document.getElementById('admin-error');
+  const adminEye = document.getElementById('admin-toggle-eye');
+
+  function openAdminPopup() {
+    adminOverlay.classList.add('is-open');
+    adminOverlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    adminError.classList.remove('is-visible');
+    adminInput.value = '';
+    setTimeout(() => adminInput.focus(), 50);
+  }
+
+  function closeAdminPopup() {
+    adminOverlay.classList.remove('is-open');
+    adminOverlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  adminOverlay.addEventListener('click', (e) => {
+    if (e.target === adminOverlay) closeAdminPopup();
+  });
+
+  adminInput.addEventListener('input', () => adminError.classList.remove('is-visible'));
+  adminInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') verificartexto();
+  });
+
+  adminEye.addEventListener('click', () => {
+    const isPassword = adminInput.type === 'password';
+    adminInput.type = isPassword ? 'text' : 'password';
+    adminEye.setAttribute('aria-pressed', String(isPassword));
+    adminEye.setAttribute('aria-label', isPassword ? 'Ocultar senha' : 'Mostrar senha');
+  });
 </script>
 
 </body>

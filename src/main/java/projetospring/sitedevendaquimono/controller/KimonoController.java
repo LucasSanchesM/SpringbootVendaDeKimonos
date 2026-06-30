@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import projetospring.sitedevendaquimono.dtos.CreateKimonoDto;
 import projetospring.sitedevendaquimono.dtos.UpdateKimonoDto;
 import projetospring.sitedevendaquimono.entity.Kimono;
 import projetospring.sitedevendaquimono.service.KimonoService;
+import projetospring.sitedevendaquimono.service.StorageService;
 
 
 
@@ -25,12 +28,13 @@ import projetospring.sitedevendaquimono.service.KimonoService;
 
 @RestController
 @RequestMapping("/v1/kimonos")
-@CrossOrigin(origins = "*")
-public class KimonoController {
+@CrossOrigin(origins = "*", exposedHeaders = "Location")public class KimonoController {
     private KimonoService kimonoService;
+    private StorageService storageService;  // <- adicionar
 
-    public KimonoController(KimonoService kimonoService) {
+    public KimonoController(KimonoService kimonoService, StorageService storageService) {  // <- adicionar parâmetro
         this.kimonoService = kimonoService;
+        this.storageService = storageService;  // <- adicionar
     }
 
     @PostMapping
@@ -62,5 +66,11 @@ public class KimonoController {
         kimonoService.deleteKimonoById(kimonoID);
         return ResponseEntity.ok().build();
     }
-
+    @PostMapping("/{kimonoId}/imagem")
+    public ResponseEntity<String> uploadImagem(@PathVariable String kimonoId,
+                                                @RequestParam("foto") MultipartFile foto) {
+    String url = storageService.uploadImage(foto);
+    kimonoService.atualizarImagem(kimonoId, url); // salva a URL no campo caminhoImagem
+    return ResponseEntity.ok(url);
+}
 }
