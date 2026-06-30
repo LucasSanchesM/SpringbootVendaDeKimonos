@@ -80,4 +80,15 @@ public class KimonoService {
         kimonoRepository.save(kimonoPresence.get());
     }
 
+
+    public void deleteKimonoById(String kimonoId){
+        var id = UUID.fromString(kimonoId);
+
+        var kimonoExist = kimonoRepository.existsById(id);
+        if(kimonoExist){
+            kimonoRepository.deleteById(id);
+        }else{
+            new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 }

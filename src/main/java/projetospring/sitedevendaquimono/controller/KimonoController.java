@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,6 +54,12 @@ public class KimonoController {
     public ResponseEntity<Void> editKimonoById(@PathVariable("kimonoId") String kimonoId, @RequestBody UpdateKimonoDto updateKimonoDto) {
         kimonoService.editKimonoById(kimonoId, updateKimonoDto);
         
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{kimonoId}")
+    public ResponseEntity<Void> deleteKimonoById(@PathVariable("kimonoId") String kimonoID){
+        kimonoService.deleteKimonoById(kimonoID);
         return ResponseEntity.ok().build();
     }
 
